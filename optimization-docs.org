@@ -1,6 +1,10 @@
+#+OPTIONS: ^:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: num:t
+#+OPTIONS: H:5
+
 * Introduction :ignore:
   The Stanc3 compiler can attempt to optimize a Stan program as it is compiled.
-
   The optimized program has the same behavior as the unoptimized program, but it may be faster, more memory efficient, or more numerically stable.
   
   This section introduces the available optimization options and describes their effect.

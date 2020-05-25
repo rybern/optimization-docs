@@ -1,21 +1,5 @@
 
-# Table of Contents
-
-1.  [Optimization levels](#orgdcb25a9)
-2.  [Optimization documentation](#orgddc2d55)
-    1.  [Function inlining](#org951385b)
-    2.  [Static loop unrolling](#orgdccffb8)
-    3.  [One step loop unrolling](#org2a4947e)
-    4.  [Constant propagation](#org2036c36)
-    5.  [Expression propagation](#org5c810bc)
-    6.  [Copy propagation](#org76cd4f4)
-    7.  [Dead code elimination](#orgdd99c0a)
-    8.  [Partial evaluation](#org11fafb9)
-    9.  [Lazy code motion](#orgec8beaf)
-    10. [Auto-differentiation level optimization](#org6c7e9be)
-
 The Stanc3 compiler can attempt to optimize a Stan program as it is compiled.
-
 The optimized program has the same behavior as the unoptimized program, but it may be faster, more memory efficient, or more numerically stable.
 
 This section introduces the available optimization options and describes their effect.
@@ -23,8 +7,6 @@ This section introduces the available optimization options and describes their e
 You can see a printout of a representation of the Stan program after the optimizations have been applied with the Stanc3 command-line option `--debug-optimized-mir-pretty`.
 You can see an analogous representation of the program before optimizations have been applied with `--debug-transformed-mir-pretty`.
 
-
-<a id="orgdcb25a9"></a>
 
 # Optimization levels
 
@@ -79,14 +61,10 @@ The levels include these optimizations:
     -   Auto-differentiation level optimization
 
 
-<a id="orgddc2d55"></a>
-
 # Optimization documentation
 
 
-<a id="org951385b"></a>
-
-## DONE Function inlining
+## Function inlining
 
 Function inlining replaces each function call to each user-defined function `f` with the body of `f`.
 It does this by copying the function body to the call site and doing the appropriate renaming of the argument variables.
@@ -125,11 +103,9 @@ Program after function inlining (simplified from the output of `--debug-optimize
     }
 
 
-<a id="orgdccffb8"></a>
+## Static loop unrolling
 
-## DONE Static loop unrolling
-
-<a id="org5d397e8"></a>
+<a id="orgb8753ff"></a>
 Static loop unrolling takes a loop that has a predictable number of iterations `X` and replaces it by writing out the loop body `X` times.
 The loop index in each repeat is replaced with the appropriate constant.
 This can speed up a program by avoiding the overhead of a loop and providing more opportunities for further optimizations (such as partial evaluation).
@@ -155,11 +131,9 @@ Program after static loop unrolling (simplified from the output of `--debug-opti
     }
 
 
-<a id="org2a4947e"></a>
+## One step loop unrolling
 
-## DONE One step loop unrolling
-
-One step loop unrolling is similar to [static loop unrolling](#org5d397e8), but it only 'unrolls' the first iteration of a loop, and can therefore work even when the total number of iterations is not predictable.
+One step loop unrolling is similar to [static loop unrolling](#orgb8753ff), but it only 'unrolls' the first iteration of a loop, and can therefore work even when the total number of iterations is not predictable.
 This can speed up a program by providing more opportunities for further optimizations such as partial evaluation and lazy code motion.
 
 Example Stan program:
@@ -188,9 +162,7 @@ Program after one step static loop unrolling (simplified from the output of `--d
     }
 
 
-<a id="org2036c36"></a>
-
-## DONE Constant propagation
+## Constant propagation
 
 Constant propagation replaces uses of a variable which is known to have a constant value `C` with that constant `C`.
 This removes the overhead of looking up the variable, and also makes many other optimizations possible (such as static loop unrolling and partial evaluation).
@@ -216,14 +188,12 @@ Program after constant propagation (simplified from the output of `--debug-optim
     }
 
 
-<a id="org5c810bc"></a>
+## Expression propagation
 
-## DONE Expression propagation
-
-<a id="org115fab8"></a>
+<a id="org5ec0ebb"></a>
 Constant propagation replaces uses of a variable which is known to have a constant value `E` with that constant `E`.
 This often results in recalculation of the expression, but provides more opportunities for further optimizations such as partial evaluation.
-Expression propagation is always followed by [lazy code motion](#org4372649) to avoid unnecessarily recomputing expressions.
+Expression propagation is always followed by [lazy code motion](#org4c59a60) to avoid unnecessarily recomputing expressions.
 
 Example Stan program:
 
@@ -250,11 +220,9 @@ Program after expression propagation (simplified from the output of `--debug-opt
     }
 
 
-<a id="org76cd4f4"></a>
+## Copy propagation
 
-## DONE Copy propagation
-
-Copy propagation is similar to [expression propagation](#org115fab8), but only propagates variables rather than arbitrary expressions.
+Copy propagation is similar to [expression propagation](#org5ec0ebb), but only propagates variables rather than arbitrary expressions.
 This can reduce the complexity of the code for other optimizations such as expression propagation.
 
 Example Stan program:
@@ -274,9 +242,7 @@ Program after copy propagation (simplified from the output of `--debug-optimized
     }
 
 
-<a id="orgdd99c0a"></a>
-
-## DONE Dead code elimination
+## Dead code elimination
 
 Dead code is code that does not have any effect on the behavior of the program.
 Code is not dead if it affects `target`, the value of any outside-observable variable like transformed parameters or generated quantities, or side effects such as print statements.
@@ -303,9 +269,7 @@ Program after dead code elimination (simplified from the output of `--debug-opti
     }
 
 
-<a id="org11fafb9"></a>
-
-## DONE Partial evaluation
+## Partial evaluation
 
 Partial evaluation searches for expressions that can be replaced with a faster, simpler, more memory efficient, or more numerically stable expression that has the same meaning.
 
@@ -326,11 +290,9 @@ Program after partial evaluation (simplified from the output of `--debug-optimiz
     }
 
 
-<a id="orgec8beaf"></a>
-
 ## Lazy code motion
 
-<a id="org4372649"></a>
+<a id="org4c59a60"></a>
 Lazy code motion rearranges the statements and expressions in a program with the goals of:
 
 -   Avoiding computing expressions more than once, and
@@ -374,9 +336,7 @@ Program after lazy code motion (simplified from the output of `--debug-optimized
     }
 
 
-<a id="org6c7e9be"></a>
-
-## DONE Auto-differentiation level optimization
+## Auto-differentiation level optimization
 
 Stan variables can have two auto-differentiation (AD) *levels*: AD or non-AD.
 AD variables carry gradient information with them, which allows Stan to calculate the log-density gradient, but they also have more overhead than non-AD variables.
