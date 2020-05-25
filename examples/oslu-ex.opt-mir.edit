@@ -1,0 +1,10 @@
+prepare_data {
+  data int n = FnReadData__("n")[1];
+  int x = 0;
+  if((n >= 1)) {
+    x = (x + 1);
+    for(i in (1 + 1):n) {
+      x = (x + i);
+    }
+  }
+}

@@ -1,0 +1,34 @@
+
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+}
+
+log_prob {
+  {
+    real x;
+    real y;
+    real z;
+    for(i in 1:10) {
+      x = sqrt(10);
+      y = sqrt(i);
+    }
+    z = sqrt(10);
+  }
+}
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

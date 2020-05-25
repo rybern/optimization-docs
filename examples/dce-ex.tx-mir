@@ -1,0 +1,36 @@
+
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+}
+
+log_prob {
+  {
+    int i;
+    i = 5;
+    for(j in 1:10) {
+      ;
+    }
+    if(0) {
+      FnPrint__("Dead code");
+    } else {
+      FnPrint__("Hi!");
+    }
+  }
+}
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

@@ -1,0 +1,13 @@
+log_prob {
+  data real lcm_sym4__;
+  data real lcm_sym3__;
+  real x;
+  real y;
+  lcm_sym4__ = sqrt(10);
+  real z;
+  for(i in 1:10) {
+    x = lcm_sym4__;
+    y = sqrt(i);
+  }
+  z = lcm_sym4__;
+}

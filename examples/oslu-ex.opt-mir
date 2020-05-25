@@ -1,0 +1,35 @@
+
+input_vars {
+  int n;
+}
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+  data int n;
+  n = FnReadData__("n")[1];
+  data int x;
+  x = 0;
+  if((n >= 1)) {
+    x = (x + 1);
+    for(i in (1 + 1):n) {
+      x = (x + i);
+    }
+  }
+}
+
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

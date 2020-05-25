@@ -1,0 +1,33 @@
+
+input_vars {
+  real y;
+}
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+  data real y;
+  y = FnReadData__("y")[1];
+}
+
+log_prob {
+  {
+    real x;
+    x = (y + 1);
+  }
+}
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

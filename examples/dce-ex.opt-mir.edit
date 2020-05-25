@@ -1,0 +1,4 @@
+log_prob {
+  int i;
+  FnPrint__("Hi!");
+}

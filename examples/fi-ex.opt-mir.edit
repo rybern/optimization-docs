@@ -1,0 +1,16 @@
+prepare_data {
+  data int a;
+  a = 2;
+  data int b;
+  data int inline_sym1__;
+  data int inline_sym3__;
+  inline_sym3__ = 0;
+  for(inline_sym4__ in 1:1) {
+    int inline_sym2__;
+    inline_sym2__ = 1;
+    inline_sym3__ = 1;
+    inline_sym1__ = (a + inline_sym2__);
+    break;
+  }
+  b = inline_sym1__;
+}

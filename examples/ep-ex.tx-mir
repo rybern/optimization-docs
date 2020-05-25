@@ -1,0 +1,34 @@
+
+input_vars {
+  int m;
+}
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+  data int m;
+  m = FnReadData__("m")[1];
+  data int n;
+  n = (m + 1);
+  FnValidateSize__("a", "n", n);
+  data array[int, n] a;
+  for(i in 1:(n - 1)) {
+    a[i] = i;
+  }
+}
+
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

@@ -1,0 +1,32 @@
+
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+}
+
+log_prob {
+  {
+    real a;
+    a = (1 + 1);
+    real b;
+    b = log((1 - a));
+    real c;
+    c = (a + (b * 5));
+  }
+}
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

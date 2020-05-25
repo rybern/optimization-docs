@@ -1,0 +1,7 @@
+prepare_data {
+  data int n = 100;
+  data array[int, 100] a;
+  for(i in 1:100) {
+    a[i] = i;
+  }
+}

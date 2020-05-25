@@ -1,0 +1,5 @@
+log_prob {
+  real a = 2;
+  real b = log1m(a);
+  real c = fma(b, 5, a);
+}
