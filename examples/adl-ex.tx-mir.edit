@@ -1,0 +1,7 @@
+input_vars {
+  real y;
+}
+
+log_prob {
+  real x = (y + 1);
+}

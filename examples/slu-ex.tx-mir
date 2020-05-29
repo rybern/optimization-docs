@@ -1,0 +1,27 @@
+
+
+prepare_data {
+  data int pos__;
+  pos__ = 1;
+  data int x;
+  x = 0;
+  for(i in 1:4) {
+    x = (x + i);
+  }
+}
+
+
+generate_quantities {
+  if(PNot__(emit_transformed_parameters__ || emit_generated_quantities__)) {
+    return;
+  }
+  if(PNot__(emit_generated_quantities__)) {
+    return;
+  }
+}
+
+transform_inits {
+  data int pos__;
+  pos__ = 1;
+}
+

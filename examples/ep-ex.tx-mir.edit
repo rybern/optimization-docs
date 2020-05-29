@@ -1,0 +1,8 @@
+prepare_data {
+  data int m = FnReadData__("m")[1];
+  data int n = (m + 1);
+  data array[int, n] a;
+  for(i in 1:(n - 1)) {
+    a[i] = i;
+  }
+}

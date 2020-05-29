@@ -1,0 +1,11 @@
+log_prob {
+  int i = 5;
+  for(j in 1:10) {
+    ;
+  }
+  if(0) {
+    FnPrint__("Dead code");
+  } else {
+    FnPrint__("Hi!");
+  }
+}

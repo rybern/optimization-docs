@@ -1,0 +1,7 @@
+prepare_data {
+  data int n = FnReadData__("n")[1];
+  data int x = 0;
+  for(i in 1:n) {
+    x = (x + i);
+  }
+}

@@ -1,0 +1,11 @@
+functions {
+  int incr(int x) {
+    int y = 1;
+    return (x + y);
+  }
+}
+
+prepare_data {
+  data int a = 2;
+  data int b = incr(a);
+}
