@@ -45,8 +45,8 @@
       
   In addition, *O3* will apply more repetitions of the optimizations, which may increase compile times.
 
-* The `--optimize-numerically-close` option
-  Using the `--optimize-numerically-close` option will disallow all optimizations which are likely to result in a program that substantially numerically different than the unoptimized program.
+* The ~--optimize-numerically-close~ option
+  Using the ~--optimize-numerically-close~ option will disallow all optimizations which are likely to result in a program that substantially numerically different than the unoptimized program.
   Some code transformations, such as replacing ~log(1-x)~ with the builtin ~log1m(x)~, may result in slight numerical differences that are detectable when sampling from the program with a fixed random seed.
   While these transformations do not result in incorrect code, and infact are often more stable than the original code, they are sometimes undesirable for testing purposes.
 * Optimization descriptions

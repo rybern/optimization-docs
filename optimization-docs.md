@@ -45,9 +45,9 @@ The levels include these optimizations:
 In addition, **O3** will apply more repetitions of the optimizations, which may increase compile times.
 
 
-# The \`&#x2013;optimize-numerically-close\` option
+# The `--optimize-numerically-close` option
 
-Using the \`&#x2013;optimize-numerically-close\` option will disallow all optimizations which are likely to result in a program that substantially numerically different than the unoptimized program.
+Using the `--optimize-numerically-close` option will disallow all optimizations which are likely to result in a program that substantially numerically different than the unoptimized program.
 Some code transformations, such as replacing `log(1-x)` with the builtin `log1m(x)`, may result in slight numerical differences that are detectable when sampling from the program with a fixed random seed.
 While these transformations do not result in incorrect code, and infact are often more stable than the original code, they are sometimes undesirable for testing purposes.
 
@@ -141,7 +141,7 @@ Compiler representation of program **after AD-level optimization** (simplified f
 
 ### One step loop unrolling
 
-One step loop unrolling is similar to [static loop unrolling](#orgdfae338), but it only 'unrolls' the first iteration of a loop, and can therefore work even when the total number of iterations is not predictable.
+One step loop unrolling is similar to [static loop unrolling](#org3a779db), but it only 'unrolls' the first iteration of a loop, and can therefore work even when the total number of iterations is not predictable.
 This can speed up a program by providing more opportunities for further optimizations such as partial evaluation and lazy code motion.
 
 Example Stan program:
@@ -218,10 +218,10 @@ Compiler representation of program **after constant propagation** (simplified fr
 
 ### Expression propagation
 
-<a id="orgdb852c7"></a>
+<a id="org7231d6e"></a>
 Constant propagation replaces uses of a variable which is known to have a constant value `E` with that constant `E`.
 This often results in recalculation of the expression, but provides more opportunities for further optimizations such as partial evaluation.
-Expression propagation is always followed by [lazy code motion](#org1210b29) to avoid unnecessarily recomputing expressions.
+Expression propagation is always followed by [lazy code motion](#org2d8138f) to avoid unnecessarily recomputing expressions.
 
 Example Stan program:
 
@@ -261,7 +261,7 @@ Compiler representation of program **after expression propagation** (simplified 
 
 ### Copy propagation
 
-Copy propagation is similar to [expression propagation](#orgdb852c7), but only propagates variables rather than arbitrary expressions.
+Copy propagation is similar to [expression propagation](#org7231d6e), but only propagates variables rather than arbitrary expressions.
 This can reduce the complexity of the code for other optimizations such as expression propagation.
 
 Example Stan program:
@@ -320,7 +320,7 @@ Compiler representation of program **after partial evaluation** (simplified from
 
 ### Lazy code motion
 
-<a id="org1210b29"></a>
+<a id="org2d8138f"></a>
 Lazy code motion rearranges the statements and expressions in a program with the goals of:
 
 -   Avoiding computing expressions more than once, and
@@ -437,7 +437,7 @@ In this code, the `for` loop and `break` is used to simulate the behavior of a `
 
 ### Static loop unrolling
 
-<a id="orgdfae338"></a>
+<a id="org3a779db"></a>
 Static loop unrolling takes a loop that has a predictable number of iterations `X` and replaces it by writing out the loop body `X` times.
 The loop index in each repeat is replaced with the appropriate constant.
 This can speed up a program by avoiding the overhead of a loop and providing more opportunities for further optimizations (such as partial evaluation).
